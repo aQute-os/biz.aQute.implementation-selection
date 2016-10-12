@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+<title>HTML USER INTERFACE</title>
+
+
+</head>
+
+<body>
+	<h1>Html User Interface</h1>
+	<div id=text style="border:1px solid black;width:100%;height:100%;padding:10px;border-radius:5px">
+	</div>
+
+
+	<script type="text/javascript">
+		var eventSource = new EventSource("/userinterface");
+		
+		eventSource.onmessage = function(event) {
+			var element = document.getElementById('text');
+			element.innerHTML += "<pre>" + event.data + "</pre>";
+		};
+		
+		eventSource.onerror = function(e) {
+			var element = document.getElementById('text');
+			element.innerHTML += "<pre>no connection</pre>";
+		};
+	</script>
+
+</body>
+</html>
